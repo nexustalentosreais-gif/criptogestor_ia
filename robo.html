@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CriptoGestor_IA | Análise automática</title>
+<style>
+{box-sizing:border-box}
+body{margin:0;background:#f2f6fc;color:#163452;font:16px Arial,sans-serif}
+header{background:#fff;border-bottom:2px solid #d9e5f5;padding:22px;text-align:center}
+h1{color:#0756a5;margin:0;font-size:28px}
+main{max-width:1260px;margin:auto;padding:18px}
+.card{background:#fff;border:1px solid #dbe6f3;border-radius:13px;padding:19px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.metric{border:1px solid #dbe6f3;border-radius:10px;padding:16px}
+.metric strong{display:block;font-size:26px;color:#095fb3;margin-top:7px}
+.muted{color:#60758d;font-size:14px;line-height:1.5}
+h2{font-size:21px;margin:0 0 13px}
+.aviso{background:#fff6df;border:1px solid #e5ca86;border-radius:12px;padding:16px;margin-bottom:16px;line-height:1.5}
+button,a.botao{display:inline-block;background:#0866c5;color:#fff;border:0;border-radius:9px;font:700 16px Arial,sans-serif;padding:13px 17px;text-decoration:none;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+a.botao{background:#e4f0fc;color:#08549a;margin-right:8px}
+table{width:100%;border-collapse:collapse;min-width:850px}
+th,td{text-align:left;border-bottom:1px solid #e4ebf3;padding:12px 10px}
+th{font-size:13px;color:#60738a}
+td{font-size:14px}
+.rolagem{overflow:auto}
+.positivo{color:#19723a;font-weight:700}
+.negativo{color:#b23232;font-weight:700}
+.neutro{color:#6b5b12;font-weight:700}
+.erro{color:#b23232}
+.status{font-weight:700;color:#155ea1}
+footer{text-align:center;color:#718196;padding:20px}
+@media(max-width:700px){
+.grid{grid-template-columns:1fr}
+main{padding:10px}
+.card{padding:13px}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>₿ CriptoGestor_IA</h1>
+<p>Análise automática — 25 criptomoedas Binance Spot</p>
+</header>
+<main>
+<div class="aviso">
+<strong>MÓDULO 2 — ANÁLISE, SEM OPERAÇÕES REAIS.</strong>
+A classificação é feita por regras matemáticas
+(médias móveis e RSI), não por uma IA preditiva treinada.
+Ela não prevê lucros nem compra ou vende.
+A atualização ocorre apenas enquanto esta página estiver aberta.
+</div>
+<div class="card">
+<a class="botao" href="./index.html">PAINEL PRINCIPAL</a>
+<button id="atualizar" type="button">ATUALIZAR ANÁLISES</button>
+<p id="status" class="status" role="status">Preparando o monitoramento...</p>
+<p class="muted">
+Fonte: dados públicos da Binance.
+25 ativos Spot/USDT selecionados por volume
+entre criptomoedas elegíveis.
+Velas fechadas de 1 hora.
+Atualização a cada 15 minutos.
+</p>
+</div>
+<div class="grid">
+<div class="metric">
+Tendência favorável
+<strong id="favoraveis">—</strong>
+</div>
+<div class="metric">
+Neutro / observar
+<strong id="neutros">—</strong>
+</div>
+<div class="metric">
+Tendência desfavorável / risco
+<strong id="desfavoraveis">—</strong>
+</div>
+</div>
+<section class="card">
+<h2>Análise das 25 moedas</h2>
+<div class="rolagem">
+<table>
+<thead>
+<tr>
+<th>Moeda</th>
+<th>Último preço</th>
+<th>Variação 24h</th>
+<th>RSI (14)</th>
+<th>EMA 12 / 26</th>
+<th>Sinal técnico</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody id="linhas">
+<tr><td colspan="7">Consultando mercado...</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<div class="card">
+<h2>Como interpretar</h2>
+<p>
+<strong>Tendência favorável:</strong>
+média curta acima da média longa, RSI em faixa
+intermediária, sem alerta de volatilidade.
+<strong>Neutro:</strong> sinais mistos.
+<strong>Desfavorável ou risco:</strong>
+tendência baixista, sobrecompra ou volatilidade elevada.
+</p>
+<p class="muted">
+Os sinais são descritivos e sujeitos a atraso.
+Não consideram taxas, slippage, profundidade do livro,
+notícias ou adequação ao investidor.
+Antes de automatizar ordens, precisaremos de
+simulação histórica e limites de risco no servidor.
+</p>
+</div>
+</main>
+<footer>
+CriptoGestor_IA • Ecossistema Universo NEXUS • Analisador 1.0
+</footer>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const BASE = "https://data-api.binance.vision/api/v3/";
+// Lista de criptoativos convencionais.
+// Evita selecionar ações tokenizadas e stablecoins.
+const ELEGIVEIS = new Set(
+"BTC ETH BNB SOL XRP DOGE ADA TRX LINK LTC AVAX DOT UNI AAVE SUI NEAR ATOM ETC XLM ALGO FIL HBAR BCH ICP INJ OP ARB PEPE SHIB TON APT RENDER FET TAO SEI ENA ONDO POL VET XTZ IMX JUP ZEC WIF BONK CRV COMP GRT LDO STX RUNE GALA PYTH FLOKI THETA EGLD SAND MANA KAS TIA KAVA DASH IOTA CAKE EOS CHZ PENDLE WLD JTO NOT RAY BERA MOVE HYPE ASTER"
+.split(" ")
+);
+const fmt = v =>
+Number(v).toLocaleString("pt-BR", {
+maximumFractionDigits: v >= 1 ? 4 : 8
+});
+const num = v =>
+Number(v).toLocaleString("pt-BR", {
+maximumFractionDigits: 2,
+minimumFractionDigits: 2
+});
+const pause = ms =>
+new Promise(r => setTimeout(r, ms));
+let ocupado = false;
+let ultima = 0;
+async function get(path) {
+const ctrl = new AbortController();
+const timeout = setTimeout(
+() => ctrl.abort(),
+15000
+);
+try {
+const r = await fetch(BASE + path, {
+signal: ctrl.signal,
+cache: "no-store"
+});
+if (!r.ok) {
+throw Error("Binance retornou HTTP " + r.status);
+}
+return await r.json();
+} finally {
+clearTimeout(timeout);
+}
+}
+// Média móvel exponencial.
+function ema(x, n) {
+const k = 2 / (n + 1);
+let a = x.slice(0, n).reduce(
+(s, v) => s + v, 0
+) / n;
+for (let i = n; i < x.length; i++) {
+a = x[i] * k + a * (1 - k);
+}
+return a;
+}
+// Índice de força relativa.
+function rsi(x, n = 14) {
+let up = 0;
+let dn = 0;
+for (let i = 1; i <= n; i++) {
+const d = x[i] - x[i - 1];
+up += Math.max(d, 0);
+dn += Math.max(-d, 0);
+}
+up /= n;
+dn /= n;
+for (let i = n + 1; i < x.length; i++) {
+const d = x[i] - x[i - 1];
+up = (
+up * (n - 1) + Math.max(d, 0)
+) / n;
+dn = (
+dn * (n - 1) + Math.max(-d, 0)
+) / n;
+}
+if (dn === 0) {
+return up === 0 ? 50 : 100;
+}
+return 100 - 100 / (1 + up / dn);
+}
+// Avaliação matemática dos sinais.
+function avaliar(klines) {
+if (
+!Array.isArray(klines) ||
+klines.length < 55
+) {
+throw Error("Poucas velas");
+}
+// Ignora a vela que ainda está em formação.
+const fechadas = klines.slice(0, -1);
+const closes = fechadas.map(k => Number(k[4]));
+if (
+closes.some(x =>
+!Number.isFinite(x) || x <= 0
+)
+) {
+throw Error("Velas inválidas");
+}
+const e12 = ema(closes, 12);
+const e26 = ema(closes, 26);
+const indice = rsi(closes);
+const ultimas = closes.slice(-25);
+let maxMov = 0;
+for (let i = 1; i < ultimas.length; i++) {
+maxMov = Math.max(
+maxMov,
+Math.abs(
+(ultimas[i] / ultimas[i - 1] - 1) * 100
+)
+);
+}
+let rotulo = "Neutro";
+let classe = "neutro";
+let nota = "Sinais mistos";
+if (maxMov > 7) {
+rotulo = "Risco elevado";
+classe = "negativo";
+nota = "Oscilação horária superior a 7%";
+} else if (indice >= 70) {
+rotulo = "Risco elevado";
+classe = "negativo";
+nota = "RSI em sobrecompra";
+} else if (
+e12 > e26 &&
+indice >= 45 &&
+indice <= 68
+) {
+rotulo = "Favorável";
+classe = "positivo";
+nota = "Tendência positiva, sem alerta";
+} else if (
+e12 < e26 &&
+indice < 50
+) {
+rotulo = "Desfavorável";
+classe = "negativo";
+nota = "Médias e RSI fracos";
+}
+return {
+indice,
+e12,
+e26,
+rotulo,
+classe,
+nota
+};
+}
+function linha(ativo, valor, variacao, sinal, erro = "") {
+const tr = document.createElement("tr");
+const vals = [
+ativo,
+fmt(valor) + " USDT",
+num(variacao) + "%",
+sinal ? num(sinal.indice) : "—",
+sinal
+? (sinal.e12 > sinal.e26 ? "Alta" : "Baixa")
+: "—",
+sinal ? sinal.rotulo : "Sem análise",
+sinal ? sinal.nota : erro
+];
+vals.forEach((x, i) => {
+const td = document.createElement("td");
+td.textContent = x;
+if (i === 5 && sinal) {
+td.className = sinal.classe;
+}
+tr.appendChild(td);
+});
+return tr;
+}
+async function executar() {
+if (ocupado) return;
+ocupado = true;
+$("atualizar").disabled = true;
+$("status").className = "status";
+$("status").textContent =
+"Conferindo pares Spot/USDT e selecionando as moedas...";
+const tbody = $("linhas");
+tbody.replaceChildren();
+try {
+const [info, tickers] = await Promise.all([
+get("exchangeInfo"),
+get("ticker/24hr")
+]);
+const pares = new Map(
+(info.symbols || [])
+.filter(s =>
+s.status === "TRADING" &&
+s.isSpotTradingAllowed === true &&
+s.quoteAsset === "USDT" &&
+ELEGIVEIS.has(s.baseAsset)
+)
+.map(s => [s.symbol, s.baseAsset])
+);
+const lista = tickers
+.filter(t =>
+pares.has(t.symbol) &&
+Number(t.quoteVolume) > 0 &&
+Number(t.lastPrice) > 0
+)
+.sort((a, b) =>
+Number(b.quoteVolume) - Number(a.quoteVolume)
+)
+.slice(0, 25);
+if (!lista.length) {
+throw Error(
+"Não foram encontrados pares habilitados na Binance"
+);
+}
+$("status").textContent =
+"Analisando " + lista.length +
+" criptomoedas com velas de 1 hora...";
+let fav = 0;
+let neu = 0;
+let des = 0;
+// Consultas sequenciais para reduzir a carga na API.
+for (const item of lista) {
+const ativo = pares.get(item.symbol);
+const preco = Number(item.lastPrice);
+const variacao = Number(item.priceChangePercent);
+try {
+const velas = await get(
+"klines?symbol=" +
+encodeURIComponent(item.symbol) +
+"&interval=1h&limit=100"
+);
+const sinal = avaliar(velas);
+if (sinal.classe === "positivo") {
+fav++;
+} else if (sinal.classe === "negativo") {
+des++;
+} else {
+neu++;
+}
+tbody.appendChild(
+linha(ativo, preco, variacao, sinal)
+);
+} catch (e) {
+neu++;
+tbody.appendChild(
+linha(
+ativo,
+preco,
+variacao,
+null,
+"Consulta indisponível"
+)
+);
+}
+$("status").textContent =
+"Analisadas " + tbody.children.length +
+" de " + lista.length + " moedas...";
+await pause(100);
+}
+$("favoraveis").textContent = fav;
+$("neutros").textContent = neu;
+$("desfavoraveis").textContent = des;
+ultima = Date.now();
+$("status").textContent =
+lista.length + " criptomoedas conferidas • " +
+new Date().toLocaleTimeString("pt-BR") +
+" • somente análise técnica";
+} catch (e) {
+$("status").className = "status erro";
+$("status").textContent =
+"Não foi possível atualizar: " + e.message;
+if (!tbody.children.length) {
+const tr = document.createElement("tr");
+const td = document.createElement("td");
+td.colSpan = 7;
+td.textContent =
+"Recarregue ou tente novamente mais tarde.";
+tr.appendChild(td);
+tbody.appendChild(tr);
+}
+} finally {
+ocupado = false;
+$("atualizar").disabled = false;
+}
+}
+$("atualizar").addEventListener(
+"click",
+executar
+);
+setInterval(() => {
+if (
+!document.hidden &&
+Date.now() - ultima >= 900000
+) {
+executar();
+}
+}, 60000);
+executar();
+</script>
+</body>
+</html>
