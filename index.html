@@ -3,64 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CriptoGestor_IA</title>
+<title>CriptoGestor_IA — 25 criptomoedas</title>
 <style>
 {box-sizing:border-box}
-body{margin:0;background:#f1f5fb;color:#17324e;font:17px Arial,sans-serif}
+body{margin:0;background:#f2f6fc;color:#19324d;font:17px Arial,Helvetica,sans-serif}
 header{background:white;border-bottom:2px solid #dce7f4;padding:22px;text-align:center}
-h1{color:#0759a8;font-size:29px;margin:0}
-h2{color:#123e70;font-size:21px;margin:0 0 16px}
-main{max-width:1150px;margin:auto;padding:18px}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.duas{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.card{background:#fff;border:1px solid #dce7f4;border-radius:14px;padding:19px;margin-bottom:16px;min-width:0}
-.aviso{background:#fff6dd;border:1px solid #e5cc83;border-radius:12px;padding:16px;margin-bottom:18px;line-height:1.5}
-.rotulo,.info{font-size:14px;color:#5f7288;line-height:1.5}
-.numero{color:#075faf;font-size:24px;font-weight:bold;margin-top:9px;overflow-wrap:anywhere}
-button{background:#0966c3;color:white;border:0;border-radius:9px;padding:13px 17px;font-size:16px;font-weight:bold;cursor:pointer;margin:5px 4px 5px 0}
-button:disabled{opacity:.55;cursor:default}
-.secundario{background:#e8f1fb;color:#07559e}
-input,select{width:100%;background:white;color:#17324e;border:1px solid #afc4d9;border-radius:9px;font-size:16px;padding:13px;margin:8px 0 15px}
+h1{color:#0758a6;font-size:29px;margin:0}
+header p{margin:8px 0 0}
+main{max-width:1250px;margin:auto;padding:18px}
+h2{font-size:22px;margin:0 0 17px;color:#124979}
+.card{background:#fff;border:1px solid #dbe5f2;border-radius:14px;padding:19px;margin-bottom:17px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.duas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.moedas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.moeda-card{border:1px solid #dbe5f2;border-radius:12px;padding:15px;min-width:0;background:#fcfdff}
+.rotulo,.info{font-size:14px;color:#62768d;line-height:1.5}
+.numero{font-weight:700;color:#0861b2;font-size:23px;margin-top:9px;overflow-wrap:anywhere}
+.cotacao{font-size:19px;font-weight:bold;margin:12px 0 6px;overflow-wrap:anywhere}
+.alta{color:#137a3c}
+.baixa{color:#bd3131}
+.aviso{background:#fff7df;border:1px solid #e4c984;border-radius:12px;padding:16px;margin-bottom:18px;line-height:1.5}
+button{background:#0866c4;color:white;border:0;border-radius:9px;padding:13px 17px;font-size:16px;font-weight:700;cursor:pointer;margin:5px 5px 5px 0}
+button:disabled{opacity:.5;cursor:default}
+.secundario{background:#e7f0fb;color:#0959a5}
+input,select{display:block;width:100%;background:#fff;color:#19324d;border:1px solid #b3c6da;border-radius:9px;padding:13px;font-size:16px;margin:8px 0 16px}
 label{font-weight:bold}
-.status{display:inline-block;border-radius:18px;background:#dff5e5;color:#17683a;padding:8px 13px;font-weight:bold}
-.status.parado{background:#ffe1e1;color:#a32929}
+.status{display:inline-block;padding:9px 13px;border-radius:20px;background:#def5e5;color:#166535;font-weight:bold}
+.status.parado{background:#ffe2e2;color:#a12d2d}
 .tabela{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:505px}
-th,td{text-align:left;padding:12px;border-bottom:1px solid #e4eaf2}
-th{color:#60758b;font-size:14px}
-footer{text-align:center;padding:22px;color:#63788d}
+table{width:100%;min-width:520px;border-collapse:collapse}
+th,td{text-align:left;padding:12px 9px;border-bottom:1px solid #e1eaf4}
+th{color:#5e7289;font-size:14px}
+footer{text-align:center;padding:22px;color:#697b90}
+@media(max-width:1050px){
+.moedas{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 @media(max-width:800px){
 .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .duas{grid-template-columns:1fr}
+.moedas{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:420px){
 main{padding:10px}
 .card{padding:13px}
-.numero{font-size:19px}
+.numero{font-size:20px}
+.moeda-card{padding:12px}
+.cotacao{font-size:17px}
 }
 </style>
 </head>
 <body>
 <header>
 <h1>₿ CriptoGestor_IA</h1>
-<p>Gestão Inteligente de Criptomoedas</p>
+<p>Gestão inteligente de criptomoedas • Binance Spot</p>
 </header>
 <main>
 <div class="aviso">
-<strong>VERSÃO 1.1 — SIMULAÇÃO</strong>
-<p>Os preços são públicos. O saldo e as operações são fictícios. Este aplicativo não acessa sua conta Binance nem movimenta dinheiro real. Não insira senhas ou chaves de API aqui.</p>
+<strong>VERSÃO 2.0 — SOMENTE SIMULAÇÃO</strong>
+<p>As 25 moedas são escolhidas entre os pares USDT em negociação no mercado Spot da Binance, pelo volume das últimas 24 horas, excluindo stablecoins e tokens alavancados. Volume não significa recomendação de investimento. Nenhum dinheiro real é movimentado. Não informe chaves da Binance neste site.</p>
 </div>
 <section class="grid">
 <div class="card">
-<div class="rotulo">Patrimônio estimado</div>
+<div class="rotulo">Patrimônio fictício estimado</div>
 <div class="numero" id="patrimonio">—</div>
 </div>
 <div class="card">
-<div class="rotulo">Saldo fictício</div>
+<div class="rotulo">Saldo fictício disponível</div>
 <div class="numero" id="saldo">—</div>
 </div>
 <div class="card">
-<div class="rotulo">Ativos na carteira</div>
+<div class="rotulo">Moedas na carteira</div>
 <div class="numero" id="ativos">—</div>
 </div>
 <div class="card">
@@ -69,60 +81,44 @@ main{padding:10px}
 </div>
 </section>
 <section class="card">
-<h2>Mercado de criptomoedas</h2>
-<div class="grid">
-<div>
-<div class="rotulo">Bitcoin (BTC)</div>
-<div class="numero" id="BTC">Consultando...</div>
+<h2>25 criptomoedas da Binance</h2>
+<p class="info">Ranking pelo volume negociado nas últimas 24 horas, em pares Spot/USDT. Seleção revista a cada 15 minutos; preços consultados a cada 60 segundos.</p>
+<div class="moedas" id="painelMoedas">
+<p>Consultando as moedas disponíveis na Binance...</p>
 </div>
-<div>
-<div class="rotulo">Ethereum (ETH)</div>
-<div class="numero" id="ETH">Consultando...</div>
-</div>
-<div>
-<div class="rotulo">Solana (SOL)</div>
-<div class="numero" id="SOL">Consultando...</div>
-</div>
-<div>
-<div class="rotulo">Fonte dos preços</div>
-<div class="numero">Binance</div>
-</div>
-</div>
-<p class="info" id="atualizacao">Consultando mercado...</p>
-<button type="button" id="atualizar">ATUALIZAR PREÇOS</button>
+<p id="atualizacao" class="info" role="status">Carregando mercado...</p>
+<button id="atualizar" type="button">ATUALIZAR COTAÇÕES</button>
 </section>
 <div class="duas">
 <section class="card">
 <h2>Comprar e vender — simulação</h2>
 <form id="formulario">
 <label for="moeda">Criptomoeda</label>
-<select id="moeda">
-<option value="BTC">Bitcoin</option>
-<option value="ETH">Ethereum</option>
-<option value="SOL">Solana</option>
+<select id="moeda" required>
+<option value="">Aguardando lista da Binance...</option>
 </select>
 <label for="tipo">Operação</label>
 <select id="tipo">
 <option value="compra">Comprar</option>
 <option value="venda">Vender</option>
 </select>
-<label for="valor">Valor em USDT</label>
+<label for="valor">Valor da operação (USDT)</label>
 <input id="valor" type="number" min="0.01" step="0.01" placeholder="Ex.: 20.00" required>
-<p class="info">Taxa fictícia de 0,10%. Cada compra pode usar até 5% do patrimônio estimado.</p>
-<button type="submit">EXECUTAR SIMULAÇÃO</button>
+<p class="info">Taxa fictícia: 0,10%. Cada compra é limitada a 5% do patrimônio.</p>
+<button type="submit" id="executar" disabled>EXECUTAR SIMULAÇÃO</button>
 <p id="mensagem" role="status" aria-live="polite"></p>
 </form>
 </section>
 <section class="card">
-<h2>Segurança</h2>
+<h2>Segurança do sistema</h2>
 <p><strong>Situação:</strong>
 <span id="situacao" class="status">Compras liberadas</span></p>
-<p>Compra máxima: <strong>5% do patrimônio</strong></p>
+<p>Limite por compra: <strong>5% do patrimônio</strong></p>
 <p>Limite de perdas realizadas no dia: <strong>3%</strong></p>
 <p>Saques e transferências automáticas: <strong>PROIBIDOS</strong></p>
 <button type="button" id="pausar">PAUSAR NOVAS COMPRAS</button>
 <button type="button" id="reiniciar" class="secundario">REINICIAR SIMULAÇÃO</button>
-<p class="info">O futuro robô 24 horas precisará de um servidor privado. Esta página não opera sozinha com o navegador fechado.</p>
+<p class="info">Dados fictícios guardados apenas neste navegador. O robô 24 horas será desenvolvido em um servidor privado; esta página não opera quando estiver fechada.</p>
 </section>
 </div>
 <section class="card">
@@ -131,10 +127,10 @@ main{padding:10px}
 <table>
 <thead>
 <tr>
-<th>Ativo</th>
+<th>Moeda</th>
 <th>Quantidade</th>
-<th>Preço</th>
-<th>Valor</th>
+<th>Cotação (USDT)</th>
+<th>Valor (USDT)</th>
 </tr>
 </thead>
 <tbody id="carteira"></tbody>
@@ -142,14 +138,14 @@ main{padding:10px}
 </div>
 </section>
 <section class="card">
-<h2>Histórico de operações</h2>
+<h2>Histórico de operações simuladas</h2>
 <div class="tabela">
 <table>
 <thead>
 <tr>
 <th>Data</th>
 <th>Operação</th>
-<th>Ativo</th>
+<th>Moeda</th>
 <th>Valor</th>
 <th>Taxa</th>
 </tr>
@@ -160,29 +156,51 @@ main{padding:10px}
 </section>
 </main>
 <footer>
-CriptoGestor_IA — Ecossistema Universo NEXUS
-<p>Versão 1.1 — Ambiente de simulação</p>
+CriptoGestor_IA • Ecossistema Universo NEXUS • Versão 2.0
 </footer>
 <script>
 "use strict";
 const $ = id => document.getElementById(id);
-const MOEDAS = ["BTC", "ETH", "SOL"];
 const CHAVE = "criptogestor_ia_dados_v1";
-const formatar = v =>
+const API = "https://data-api.binance.vision/api/v3/";
+const IGNORAR = new Set([
+"USDT","USDC","FDUSD","TUSD","DAI","USDE",
+"USDP","USD1","RLUSD","PYUSD","BFUSD",
+"EUR","EURC","EURI","AEUR","BRL","TRY",
+"ARS","UAH","RUB","ZAR","VAI","USTC",
+"WBTC","WBETH","WETH","WBNB","BETH",
+"STETH","LDUSDT","USDY","USDD","PAXG"
+]);
+const dinheiro = v =>
 Number(v).toLocaleString("pt-BR", {
 minimumFractionDigits: 2,
 maximumFractionDigits: 2
 }) + " USDT";
-const qtd = v =>
+const quantidade = v =>
 Number(v).toLocaleString("pt-BR", {
 maximumFractionDigits: 8
 });
+const cotacao = v =>
+Number(v).toLocaleString("pt-BR", {
+minimumFractionDigits: 2,
+maximumFractionDigits:
+v >= 100 ? 2 :
+v >= 1 ? 4 :
+v >= 0.01 ? 6 : 10
+}) + " USDT";
 const hoje = () =>
 new Date().toLocaleDateString("sv-SE", {
 timeZone: "America/Sao_Paulo"
 });
-function novoEstado() {
-return {
+const seguro = t =>
+String(t).replace(/[&<>"']/g, c => ({
+"&": "&amp;",
+"<": "&lt;",
+">": "&gt;",
+'"': "&quot;",
+"'": "&#39;"
+}[c]));
+const novo = () => ({
 saldo: 1000,
 moedas: { BTC: 0, ETH: 0, SOL: 0 },
 custos: { BTC: 0, ETH: 0, SOL: 0 },
@@ -192,8 +210,7 @@ data: hoje(),
 perda: 0,
 inicio: 1000,
 historico: []
-};
-}
+});
 function carregar() {
 try {
 const d = JSON.parse(localStorage.getItem(CHAVE));
@@ -204,194 +221,307 @@ d.saldo >= 0 &&
 d.moedas &&
 d.custos &&
 Array.isArray(d.historico) &&
-MOEDAS.every(m =>
-Number.isFinite(d.moedas[m]) &&
-d.moedas[m] >= 0 &&
+Number.isFinite(d.resultado) &&
+Number.isFinite(d.perda) &&
+Object.entries(d.moedas).every(([m,q]) =>
+/^[A-Z0-9]{2,20}$/.test(m) &&
+Number.isFinite(q) &&
+q >= 0 &&
 Number.isFinite(d.custos[m]) &&
 d.custos[m] >= 0
 )
-) {
-return d;
-}
-} catch (e) {}
-return novoEstado();
+) return d;
+} catch(e) {}
+return novo();
 }
 let estado = carregar();
-const precos = { BTC: null, ETH: null, SOL: null };
-const horarios = { BTC: 0, ETH: 0, SOL: 0 };
+let pares = new Map();
+let cotacoes = new Map();
+let selecionadas = [];
+let ultimaConsulta = 0;
+let ultimaSelecao = 0;
+let carregando = false;
 function salvar() {
 try {
 localStorage.setItem(CHAVE, JSON.stringify(estado));
-} catch (e) {
-console.warn("Dados locais não puderam ser salvos.");
+} catch(e) {
+console.warn("Armazenamento indisponível");
 }
 }
-function precoValido(m) {
-return (
-Number.isFinite(precos[m]) &&
-precos[m] > 0 &&
-Date.now() - horarios[m] < 90000
+function fresca(m) {
+const t = cotacoes.get(m);
+return Boolean(
+t &&
+t.price > 0 &&
+Date.now() - ultimaConsulta < 180000 &&
+pares.has(m)
 );
 }
-function semCotacao() {
-return MOEDAS.some(
-m => estado.moedas[m] > 0 && !precoValido(m)
+function faltaCotacao() {
+return Object.entries(estado.moedas).some(
+([m,q]) => q > 0 && !fresca(m)
 );
 }
 function patrimonio() {
 return estado.saldo +
-MOEDAS.reduce(
-(total, m) =>
-total + estado.moedas[m] * (precos[m] || 0),
+Object.entries(estado.moedas).reduce(
+(s,[m,q]) => s + q * (cotacoes.get(m)?.price || 0),
 0
 );
 }
-function atualizarDia() {
+function virarDia() {
 if (estado.data !== hoje()) {
 estado.data = hoje();
 estado.perda = 0;
-estado.inicio = semCotacao() ? null : patrimonio();
+estado.inicio = faltaCotacao() ? null : patrimonio();
 salvar();
 }
-if (estado.inicio === null && !semCotacao()) {
+if (estado.inicio === null && !faltaCotacao()) {
 estado.inicio = patrimonio();
 salvar();
 }
 }
-function limiteAtingido() {
-return (
-estado.inicio !== null &&
-estado.perda >= estado.inicio * 0.03
-);
+function bloqueada() {
+return estado.inicio !== null &&
+estado.perda >= estado.inicio * 0.03;
 }
-function avisar(texto, erro = false) {
-$("mensagem").textContent = texto;
+function aviso(t, erro=false) {
+$("mensagem").textContent = t;
 $("mensagem").style.color =
-erro ? "#a32929" : "#176735";
+erro ? "#b42b2b" : "#166b3b";
 }
-function atualizarTela() {
-atualizarDia();
-$("saldo").textContent = formatar(estado.saldo);
-$("resultado").textContent =
-formatar(estado.resultado);
+function atualizarSeletor() {
+const anterior = $("moeda").value;
+const extras = Object.keys(estado.moedas).filter(
+m =>
+estado.moedas[m] > 0 &&
+!selecionadas.includes(m) &&
+pares.has(m)
+);
+const lista = [...selecionadas, ...extras];
+$("moeda").replaceChildren();
+for (const m of lista) {
+const opt = document.createElement("option");
+opt.value = m;
+opt.textContent =
+m + (extras.includes(m) ? " (na carteira)" : "");
+$("moeda").append(opt);
+}
+if (lista.includes(anterior)) {
+$("moeda").value = anterior;
+}
+$("executar").disabled = lista.length === 0;
+}
+function renderizar() {
+virarDia();
+$("saldo").textContent = dinheiro(estado.saldo);
+$("resultado").textContent = dinheiro(estado.resultado);
 $("resultado").style.color =
-estado.resultado < 0 ? "#a32929" : "#176735";
+estado.resultado < 0 ? "#ba2d2d" : "#176735";
 $("ativos").textContent =
-MOEDAS.filter(
-m => estado.moedas[m] > 0.000000001
-).length + " ativos";
+Object.values(estado.moedas)
+.filter(q => q > 0.000000001).length + " ativos";
 $("patrimonio").textContent =
-semCotacao()
-? "Aguardando preços"
-: formatar(patrimonio());
-const bloqueado =
-estado.pausado || limiteAtingido();
+faltaCotacao()
+? "Cotação indisponível"
+: dinheiro(patrimonio());
+const b = estado.pausado || bloqueada();
 $("situacao").textContent =
 estado.pausado
 ? "Compras pausadas"
-: limiteAtingido()
+: bloqueada()
 ? "Limite diário atingido"
 : "Compras liberadas";
 $("situacao").className =
-"status" + (bloqueado ? " parado" : "");
+"status" + (b ? " parado" : "");
 $("pausar").textContent =
 estado.pausado
 ? "LIBERAR COMPRAS"
 : "PAUSAR NOVAS COMPRAS";
+$("painelMoedas").innerHTML =
+selecionadas.length
+? selecionadas.map((m,i) => {
+const t = cotacoes.get(m);
+const p = t?.price;
+const variacao = t?.change;
+const volume = t?.volume;
+return `
+<div class="moeda-card">
+<strong>${i+1}. ${seguro(m)}</strong>
+<div class="cotacao">
+${p > 0 ? cotacao(p) : "Indisponível"}
+</div>
+<div class="${variacao >= 0 ? "alta" : "baixa"}">
+${Number.isFinite(variacao)
+? (variacao > 0 ? "+" : "") +
+variacao.toFixed(2) + "% (24h)"
+: "Sem dados"}
+</div>
+<div class="info">
+Volume 24h:
+${Number(volume || 0).toLocaleString("pt-BR",{
+notation:"compact",
+maximumFractionDigits:1
+})} USDT
+</div>
+</div>`;
+}).join("")
+: "<p>Consultando moedas disponíveis na Binance...</p>";
+const mostrar = [
+...new Set([
+...selecionadas,
+...Object.keys(estado.moedas).filter(
+m => estado.moedas[m] > 0
+)
+])
+];
 $("carteira").innerHTML =
-MOEDAS.map(m => `
+mostrar.length
+? mostrar.map(m => `
 <tr>
-<td>${m}</td>
-<td>${qtd(estado.moedas[m])}</td>
-<td>${precoValido(m) ? formatar(precos[m]) : "Indisponível"}</td>
-<td>${precoValido(m) ? formatar(estado.moedas[m] * precos[m]) : "—"}</td>
+<td>${seguro(m)}</td>
+<td>${quantidade(estado.moedas[m] || 0)}</td>
+<td>${fresca(m) ? cotacao(cotacoes.get(m).price) : "Indisponível"}</td>
+<td>${fresca(m) ? dinheiro((estado.moedas[m] || 0) * cotacoes.get(m).price) : "—"}</td>
 </tr>
-`).join("");
+`).join("")
+: '<tr><td colspan="4">Aguardando mercado...</td></tr>';
 $("historico").innerHTML =
 estado.historico.length
-? estado.historico.slice(0, 30).map(o => `
+? estado.historico.slice(0,30).map(o => `
 <tr>
-<td>${o.data}</td>
-<td>${o.tipo}</td>
-<td>${o.moeda}</td>
-<td>${formatar(o.valor)}</td>
-<td>${formatar(o.taxa)}</td>
+<td>${seguro(o.data)}</td>
+<td>${seguro(o.tipo)}</td>
+<td>${seguro(o.moeda)}</td>
+<td>${dinheiro(o.valor)}</td>
+<td>${dinheiro(o.taxa)}</td>
 </tr>
 `).join("")
 : '<tr><td colspan="5">Nenhuma operação registrada.</td></tr>';
+atualizarSeletor();
 }
-async function consultarPrecos() {
-$("atualizar").disabled = true;
-const respostas = await Promise.allSettled(
-MOEDAS.map(async m => {
+async function requisicao(caminho) {
 const ctrl = new AbortController();
-const tempo = setTimeout(
+const timer = setTimeout(
 () => ctrl.abort(),
-10000
+15000
 );
 try {
-const resposta = await fetch(
-"https://data-api.binance.vision/api/v3/ticker/price?symbol=" +
-m + "USDT",
-{
+const r = await fetch(API + caminho, {
 cache: "no-store",
 signal: ctrl.signal
-}
-);
-if (!resposta.ok) {
-throw Error("Falha ao consultar a Binance");
-}
-const dados = await resposta.json();
-const p = Number(dados.price);
-if (!Number.isFinite(p) || p <= 0) {
-throw Error("Preço inválido");
-}
-precos[m] = p;
-horarios[m] = Date.now();
-$(m).textContent = formatar(p);
-} finally {
-clearTimeout(tempo);
-}
-})
-);
-respostas.forEach((r, i) => {
-if (r.status === "rejected") {
-const m = MOEDAS[i];
-$(m).textContent =
-precoValido(m)
-? formatar(precos[m])
-: "Indisponível";
-}
 });
-$("atualizacao").textContent =
-respostas.every(r => r.status === "fulfilled")
-? "Preços atualizados às " +
-new Date().toLocaleTimeString("pt-BR") +
-". Próxima consulta em 30 segundos."
-: "Algumas cotações estão indisponíveis. Verifique a conexão ou o acesso à Binance.";
-$("atualizar").disabled = false;
-atualizarTela();
+if (!r.ok) {
+throw Error("Binance HTTP " + r.status);
 }
-$("formulario").addEventListener("submit", event => {
-event.preventDefault();
-atualizarDia();
-const moeda = $("moeda").value;
+return await r.json();
+} finally {
+clearTimeout(timer);
+}
+}
+async function atualizarMercado() {
+if (carregando) return;
+carregando = true;
+$("atualizar").disabled = true;
+$("atualizacao").textContent =
+"Consultando Binance Spot...";
+try {
+if (pares.size === 0) {
+const info = await requisicao("exchangeInfo");
+const validos = (info.symbols || []).filter(s =>
+s.status === "TRADING" &&
+s.isSpotTradingAllowed === true &&
+s.quoteAsset === "USDT" &&
+/^[A-Z0-9]{2,20}$/.test(s.baseAsset) &&
+/^[A-Z0-9]{4,30}$/.test(s.symbol) &&
+!IGNORAR.has(s.baseAsset) &&
+!(
+s.baseAsset.length >= 5 &&
+/(UP|DOWN|BULL|BEAR)$/.test(s.baseAsset)
+)
+);
+pares = new Map(
+validos.map(s => [s.baseAsset,s.symbol])
+);
+}
+const lista = await requisicao("ticker/24hr");
+if (!Array.isArray(lista)) {
+throw Error("Resposta de mercado inválida");
+}
+const porSimbolo = new Map(
+lista.map(t => [t.symbol,t])
+);
+const novos = new Map();
+for (const [moeda,simbolo] of pares) {
+const t = porSimbolo.get(simbolo);
+const price = Number(t?.lastPrice);
+const volume = Number(t?.quoteVolume);
+const change = Number(t?.priceChangePercent);
+if (
+price > 0 &&
+Number.isFinite(volume) &&
+volume > 0
+) {
+novos.set(moeda, {
+price,
+volume,
+change: Number.isFinite(change) ? change : 0
+});
+}
+}
+if (novos.size < 25) {
+throw Error("Menos de 25 moedas disponíveis nesta consulta");
+}
+cotacoes = novos;
+ultimaConsulta = Date.now();
+if (
+selecionadas.length !== 25 ||
+Date.now() - ultimaSelecao > 900000
+) {
+selecionadas = [...cotacoes.entries()]
+.sort((a,b) => b[1].volume - a[1].volume)
+.slice(0,25)
+.map(([m]) => m);
+ultimaSelecao = Date.now();
+}
+$("atualizacao").textContent =
+"25 pares Spot/USDT confirmados na Binance • Atualizado às " +
+new Date().toLocaleTimeString("pt-BR") +
+". Disponibilidade na sua conta pode variar por região.";
+} catch(e) {
+$("atualizacao").textContent =
+"Não foi possível atualizar a lista da Binance: " +
+e.message +
+". Confira a conexão e clique em ATUALIZAR COTAÇÕES.";
+} finally {
+carregando = false;
+$("atualizar").disabled = false;
+renderizar();
+}
+}
+$("formulario").addEventListener("submit",e => {
+e.preventDefault();
+virarDia();
+const m = $("moeda").value;
 const tipo = $("tipo").value;
 const valor = Number($("valor").value);
+const permitido =
+selecionadas.includes(m) ||
+(estado.moedas[m] > 0 && pares.has(m));
 if (
-!MOEDAS.includes(moeda) ||
-!["compra", "venda"].includes(tipo) ||
+!permitido ||
+!["compra","venda"].includes(tipo) ||
 !Number.isFinite(valor) ||
 valor <= 0
 ) {
-avisar("Informe uma operação válida.", true);
+aviso("Operação inválida.",true);
 return;
 }
-if (!precoValido(moeda) || semCotacao()) {
-avisar("Aguarde preços atualizados.", true);
+if (!fresca(m) || faltaCotacao()) {
+aviso("Aguarde preços válidos e atualizados.",true);
 return;
 }
-const preco = precos[moeda];
+const preco = cotacoes.get(m).price;
 const taxa = valor * 0.001;
 const unidades =
 tipo === "compra"
@@ -400,101 +530,99 @@ tipo === "compra"
 if (tipo === "compra") {
 if (
 estado.pausado ||
-limiteAtingido() ||
+bloqueada() ||
 estado.inicio === null
 ) {
-avisar(
-"Compras bloqueadas pela proteção de capital.",
-true
-);
+aviso("Compras bloqueadas pela segurança.",true);
 return;
 }
 if (valor > patrimonio() * 0.05 + 0.000001) {
-avisar(
-"Compra acima do limite de 5% do patrimônio.",
-true
-);
+aviso("Compra acima de 5% do patrimônio.",true);
 return;
 }
 if (valor > estado.saldo + 0.000001) {
-avisar("Saldo fictício insuficiente.", true);
+aviso("Saldo fictício insuficiente.",true);
 return;
 }
-const anterior = estado.moedas[moeda];
-estado.custos[moeda] =
-(
-anterior * estado.custos[moeda] +
-valor
-) / (anterior + unidades);
-estado.moedas[moeda] += unidades;
+const anterior = estado.moedas[m] || 0;
+const custo = estado.custos[m] || 0;
+estado.custos[m] =
+(anterior * custo + valor) /
+(anterior + unidades);
+estado.moedas[m] = anterior + unidades;
 estado.saldo -= valor;
 } else {
 if (
 unidades >
-estado.moedas[moeda] + 0.0000000001
+(estado.moedas[m] || 0) + 0.0000000001
 ) {
-avisar(
-"Quantidade insuficiente para venda.",
-true
-);
+aviso("Quantidade insuficiente na carteira.",true);
 return;
 }
 const lucro =
-valor -
-taxa -
-unidades * estado.custos[moeda];
+valor - taxa -
+unidades * (estado.custos[m] || 0);
 estado.resultado += lucro;
-estado.perda += Math.max(0, -lucro);
-estado.moedas[moeda] = Math.max(
+estado.perda += Math.max(0,-lucro);
+estado.moedas[m] = Math.max(
 0,
-estado.moedas[moeda] - unidades
+estado.moedas[m] - unidades
 );
-if (estado.moedas[moeda] < 0.0000000001) {
-estado.moedas[moeda] = 0;
-estado.custos[moeda] = 0;
+if (estado.moedas[m] < 0.0000000001) {
+estado.moedas[m] = 0;
+estado.custos[m] = 0;
 }
 estado.saldo += valor - taxa;
 }
 estado.historico.unshift({
 data: new Date().toLocaleString("pt-BR"),
 tipo: tipo === "compra" ? "Compra" : "Venda",
-moeda,
+moeda: m,
 valor,
 taxa
 });
-estado.historico =
-estado.historico.slice(0, 100);
+estado.historico = estado.historico.slice(0,100);
 salvar();
-atualizarTela();
+renderizar();
 $("valor").value = "";
-avisar(
+aviso(
 "Operação simulada registrada. Nenhum dinheiro real foi movimentado."
 );
 });
 $("pausar").addEventListener("click", () => {
 estado.pausado = !estado.pausado;
 salvar();
-atualizarTela();
+renderizar();
 });
 $("reiniciar").addEventListener("click", () => {
 if (
 confirm(
-"Reiniciar a simulação com 1.000 USDT fictícios?"
+"Apagar a simulação e reiniciar com 1.000 USDT fictícios?"
 )
 ) {
-estado = novoEstado();
+estado = novo();
 salvar();
-atualizarTela();
-avisar("Simulação reiniciada.");
+renderizar();
+aviso("Simulação reiniciada.");
 }
 });
 $("atualizar").addEventListener(
 "click",
-consultarPrecos
+atualizarMercado
 );
-atualizarTela();
-consultarPrecos();
-setInterval(consultarPrecos, 30000);
+renderizar();
+atualizarMercado();
+setInterval(() => {
+if (!document.hidden) atualizarMercado();
+},60000);
+document.addEventListener("visibilitychange", () => {
+if (
+!document.hidden &&
+Date.now() - ultimaConsulta > 60000
+) {
+atualizarMercado();
+}
+});
 </script>
 </body>
 </html>
