@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CriptoGestor_IA</title>
+<style>
+{box-sizing:border-box}
+body{margin:0;background:#f1f5fb;color:#182f49;font-family:Arial,sans-serif;font-size:17px}
+header{background:#fff;border-bottom:2px solid #dce7f4;padding:22px;text-align:center}
+h1{color:#0755a2;font-size:29px;margin:0}
+h2{font-size:22px;color:#113d70}
+main{max-width:1150px;margin:auto;padding:18px}
+.card{background:white;border:1px solid #dce7f4;border-radius:14px;padding:20px;margin-bottom:17px;box-shadow:0 3px 10px #12345608}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.numero{font-size:24px;font-weight:bold;color:#0862b3;margin-top:10px;overflow-wrap:anywhere}
+.rotulo{font-size:15px;color:#61748c}
+button{background:#0866c6;color:#fff;border:0;border-radius:9px;padding:14px 19px;font-size:16px;font-weight:bold;cursor:pointer;margin:5px 3px 5px 0}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.secundario{background:#e7f0fa;color:#09559d}
+input,select{width:100%;padding:13px;font-size:17px;border:1px solid #aebfd3;border-radius:8px;margin:8px 0 15px;background:#fff;color:#182f49}
+label{font-weight:bold}
+.aviso{background:#fff6de;border:1px solid #e4c77d;border-radius:11px;padding:17px;margin-bottom:18px;line-height:1.5}
+.estado{display:inline-block;padding:10px 14px;background:#ddf5e4;color:#176535;border-radius:20px;font-weight:bold}
+.bloqueado{background:#ffe2e2;color:#a32929}
+table{width:100%;border-collapse:collapse;min-width:500px}
+td,th{padding:12px;text-align:left;border-bottom:1px solid #e0e8f1}
+th{color:#5d7088}
+.tabela{overflow-x:auto}
+.info{font-size:14px;color:#63768e;line-height:1.5}
+footer{text-align:center;padding:25px;color:#6a7c92}
+@media(max-width:800px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.duas{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+main{padding:10px}
+.card{padding:14px}
+.numero{font-size:20px}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>₿ CriptoGestor_IA</h1>
+<p>Gestão Inteligente de Criptomoedas</p>
+</header>
+<main>
+<div class="aviso">
+<strong>VERSÃO 1 — AMBIENTE DE SIMULAÇÃO</strong>
+<p>Preços públicos da Binance. Carteira e operações fictícias. Nenhum dinheiro real será movimentado nesta versão.</p>
+</div>
+<div class="grid">
+<div class="card">
+<div class="rotulo">Patrimônio estimado</div>
+<div class="numero" id="patrimonio">—</div>
+</div>
+<div class="card">
+<div class="rotulo">Saldo disponível</div>
+<div class="numero" id="saldo">—</div>
+</div>
+<div class="card">
+<div class="rotulo">Ativos na carteira</div>
+<div class="numero" id="ativos">—</div>
+</div>
+<div class="card">
+<div class="rotulo">Resultado realizado</div>
+<div class="numero" id="resultado">—</div>
+</div>
+</div>
+<section class="card">
+<h2>Mercado de criptomoedas</h2>
+<div class="grid">
+<div>
+<div class="rotulo">Bitcoin (BTC)</div>
+<div class="numero" id="BTC">Consultando...</div>
+</div>
+<div>
+<div class="rotulo">Ethereum (ETH)</div>
+<div class="numero" id="ETH">Consultando...</div>
+</div>
+<div>
+<div class="rotulo">Solana (SOL)</div>
+<div class="numero" id="SOL">Consultando...</div>
+</div>
+<div>
+<div class="rotulo">Fonte dos preços</div>
+<div class="numero">Binance</div>
+</div>
+</div>
+<p id="atualizacao" class="info">Consultando mercado...</p>
+<button id="atualizar" type="button">ATUALIZAR PREÇOS</button>
+</section>
+<div class="duas">
+<section class="card">
+<h2>Comprar e vender</h2>
+<form id="formulario">
+<label for="moeda">Criptomoeda</label>
+<select id="moeda">
+<option value="BTC">Bitcoin</option>
+<option value="ETH">Ethereum</option>
+<option value="SOL">Solana</option>
+</select>
+<label for="tipo">Operação</label>
+<select id="tipo">
+<option value="compra">Comprar</option>
+<option value="venda">Vender</option>
+</select>
+<label for="valor">Valor em USDT</label>
+<input id="valor" type="number" min="0.01" step="0.01" required placeholder="Digite o valor">
+<p class="info">Taxa simulada: 0,10%. Compra máxima de 5% do patrimônio por operação.</p>
+<button type="submit">EXECUTAR SIMULAÇÃO</button>
+<p id="mensagem" role="status" aria-live="polite"></p>
+</form>
+</section>
+<section class="card">
+<h2>Segurança do sistema</h2>
+<p><strong>Situação:</strong></p>
+<span id="situacao" class="estado">Compras liberadas</span>
+<p>Limite por compra: <strong>5%</strong></p>
+<p>Limite de perdas realizadas no dia: <strong>3%</strong></p>
+<p>Saques automáticos: <strong>PROIBIDOS</strong></p>
+<p>Transferências automáticas: <strong>PROIBIDAS</strong></p>
+<button id="pausar" type="button">PAUSAR NOVAS COMPRAS</button>
+<button id="reiniciar" class="secundario" type="button">REINICIAR SIMULAÇÃO</button>
+<p class="info">O funcionamento automático 24 horas exigirá um servidor seguro em uma próxima etapa.</p>
+</section>
+</div>
+<section class="card">
+<h2>Minha carteira simulada</h2>
+<div class="tabela">
+<table>
+<thead>
+<tr>
+<th>Ativo</th>
+<th>Quantidade</th>
+<th>Preço</th>
+<th>Valor total</th>
+</tr>
+</thead>
+<tbody id="carteira"></tbody>
+</table>
+</div>
+</section>
+<section class="card">
+<h2>Histórico de operações</h2>
+<div class="tabela">
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Operação</th>
+<th>Ativo</th>
+<th>Valor</th>
+<th>Taxa</th>
+</tr>
+</thead>
+<tbody id="historico"></tbody>
+</table>
+</div>
+</section>
+</main>
+<footer>
+CriptoGestor_IA — Ecossistema Universo NEXUS
+<p>Versão 1.0 — Simulação financeira</p>
+</footer>
+<script>
+"use strict";
+const CHAVE="criptogestor_ia_dados_v1";
+const MOEDAS=["BTC","ETH","SOL"];
+const TAXA=0.001;
+const $=id=>document.getElementById(id);
+function dinheiro(v){
+return Number(v).toLocaleString("pt-BR",{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+})+" USDT";
+}
+function quantidade(v){
+return Number(v).toLocaleString("pt-BR",{
+maximumFractionDigits:8
+});
+}
+function hoje(){
+return new Date().toLocaleDateString("sv-SE",{
+timeZone:"America/Sao_Paulo"
+});
+}
+function inicial(){
+return {
+saldo:1000,
+moedas:{BTC:0,ETH:0,SOL:0},
+custos:{BTC:0,ETH:0,SOL:0},
+resultado:0,
+pausado:false,
+data:hoje(),
+perda:0,
+inicio:1000,
+historico:[]
+};
+}
+function carregar(){
+try{
+const d=JSON.parse(localStorage.getItem(CHAVE));
+if(d&&Number.isFinite(d.saldo)&&d.moedas&&d.custos&&Array.isArray(d.historico)){
+return d;
+}
+}catch(e){}
+return inicial();
+}
+let dados=carregar();
+const precos={BTC:null,ETH:null,SOL:null};
+const horarios={BTC:0,ETH:0,SOL:0};
+function salvar(){
+try{
+localStorage.setItem(CHAVE,JSON.stringify(dados));
+}catch(e){
+console.warn("Falha ao salvar os dados locais.");
+}
+}
+function valido(m){
+return Number.isFinite(precos[m])&&
+precos[m]>0&&
+Date.now()-horarios[m]<90000;
+}
+function semPreco(){
+return MOEDAS.some(m=>dados.moedas[m]>0&&!valido(m));
+}
+function patrimonio(){
+return dados.saldo+MOEDAS.reduce(
+(t,m)=>t+dados.moedas[m](precos[m]||0),0
+);
+}
+function atualizarDia(){
+if(dados.data!==hoje()){
+dados.data=hoje();
+dados.perda=0;
+dados.inicio=semPreco()?null:patrimonio();
+salvar();
+}
+if(dados.inicio===null&&!semPreco()){
+dados.inicio=patrimonio();
+salvar();
+}
+}
+function bloqueio(){
+return dados.inicio!==null&&
+dados.perda>=dados.inicio0.03;
+}
+function mensagem(t,erro=false){
+$("mensagem").textContent=t;
+$("mensagem").style.color=erro?"#a32929":"#176535";
+}
+function renderizar(){
+atualizarDia();
+$("saldo").textContent=dinheiro(dados.saldo);
+$("resultado").textContent=dinheiro(dados.resultado);
+$("resultado").style.color=dados.resultado<0?"#a32929":"#176535";
+$("ativos").textContent=
+MOEDAS.filter(m=>dados.moedas[m]>0.00000001).length+" ativos";
+$("patrimonio").textContent=
+semPreco()?"Aguardando preços":dinheiro(patrimonio());
+$("situacao").textContent=
+dados.pausado?"Compras pausadas":
+bloqueio()?"Limite diário atingido":
+"Compras liberadas";
+$("situacao").className=
+"estado"+(dados.pausado||bloqueio()?" bloqueado":"");
+$("pausar").textContent=
+dados.pausado?"LIBERAR COMPRAS":"PAUSAR NOVAS COMPRAS";
+$("carteira").innerHTML=MOEDAS.map(m=>`
+<tr>
+<td>${m}</td>
+<td>${quantidade(dados.moedas[m])}</td>
+<td>${valido(m)?dinheiro(precos[m]):"Indisponível"}</td>
+<td>${valido(m)?dinheiro(dados.moedas[m]precos[m]):"—"}</td>
+</tr>
+`).join("");
+$("historico").innerHTML=
+dados.historico.length?
+dados.historico.slice(0,30).map(o=>`
+<tr>
+<td>${o.data}</td>
+<td>${o.tipo}</td>
+<td>${o.moeda}</td>
+<td>${dinheiro(o.valor)}</td>
+<td>${dinheiro(o.taxa)}</td>
+</tr>
+`).join(""):
+'<tr><td colspan="5">Nenhuma operação registrada.</td></tr>';
+}
+async function consultar(){
+$("atualizar").disabled=true;
+const consultas=await Promise.allSettled(
+MOEDAS.map(async m=>{
+const url="https://data-api.binance.vision/api/v3/ticker/price?symbol="+m+"USDT";
+const resposta=await fetch(url,{cache:"no-store"});
+if(!resposta.ok)throw Error("Falha de consulta");
+const r=await resposta.json();
+const p=Number(r.price);
+if(!Number.isFinite(p)||p<=0)throw Error("Preço inválido");
+precos[m]=p;
+horarios[m]=Date.now();
+$(m).textContent=dinheiro(p);
+})
+);
+consultas.forEach((r,i)=>{
+if(r.status==="rejected"){
+const m=MOEDAS[i];
+$(m).textContent=valido(m)?dinheiro(precos[m]):"Indisponível";
+}
+});
+$("atualizacao").textContent=
+consultas.every(r=>r.status==="fulfilled")?
+"Preços atualizados às "+
+new Date().toLocaleTimeString("pt-BR")+
+". Próxima consulta automática em até 30 segundos.":
+"Alguns preços estão indisponíveis. Operações exigem preços atualizados.";
+$("atualizar").disabled=false;
+renderizar();
+}
+$("formulario").addEventListener("submit",e=>{
+e.preventDefault();
+atualizarDia();
+const m=$("moeda").value;
+const tipo=$("tipo").value;
+const valor=Number($("valor").value);
+if(!MOEDAS.includes(m)||
+!["compra","venda"].includes(tipo)||
+!Number.isFinite(valor)||valor<=0){
+mensagem("Operação inválida.",true);
+return;
+}
+if(!valido(m)||semPreco()){
+mensagem("Aguarde a atualização dos preços.",true);
+return;
+}
+const preco=precos[m];
+const taxa=valorTAXA;
+const unidades=tipo==="compra"?
+(valor-taxa)/preco:valor/preco;
+if(tipo==="compra"){
+if(dados.pausado||bloqueio()){
+mensagem("Novas compras estão bloqueadas.",true);
+return;
+}
+if(valor>patrimonio()0.05+0.000001){
+mensagem("Compra acima do limite de 5%.",true);
+return;
+}
+if(valor>dados.saldo+0.000001){
+mensagem("Saldo insuficiente.",true);
+return;
+}
+const anterior=dados.moedas[m];
+dados.custos[m]=
+(anteriordados.custos[m]+valor)/
+(anterior+unidades);
+dados.moedas[m]+=unidades;
+dados.saldo-=valor;
+}else{
+if(unidades>dados.moedas[m]+0.0000000001){
+mensagem("Quantidade insuficiente para venda.",true);
+return;
+}
+const lucro=
+valor-taxa-unidadesdados.custos[m];
+dados.resultado+=lucro;
+dados.perda+=Math.max(0,-lucro);
+dados.moedas[m]=Math.max(0,dados.moedas[m]-unidades);
+if(dados.moedas[m]<0.0000000001){
+dados.moedas[m]=0;
+dados.custos[m]=0;
+}
+dados.saldo+=valor-taxa;
+}
+dados.historico.unshift({
+data:new Date().toLocaleString("pt-BR"),
+tipo:tipo==="compra"?"Compra":"Venda",
+moeda:m,
+valor:valor,
+taxa:taxa
+});
+dados.historico=dados.historico.slice(0,100);
+salvar();
+renderizar();
+$("valor").value="";
+mensagem("Operação simulada realizada. Nenhum dinheiro real foi movimentado.");
+});
+$("pausar").addEventListener("click",()=>{
+dados.pausado=!dados.pausado;
+salvar();
+renderizar();
+});
+$("reiniciar").addEventListener("click",()=>{
+if(confirm("Deseja reiniciar a simulação com 1.000 USDT fictícios?")){
+dados=inicial();
+salvar();
+renderizar();
+mensagem("Simulação reiniciada.");
+}
+});
+$("atualizar").addEventListener("click",consultar);
+renderizar();
+consultar();
+setInterval(consultar,30000);
+</script>
+</body>
+</html>
