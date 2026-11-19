@@ -2,627 +2,662 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CriptoGestor_IA — 25 criptomoedas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>CriptoGestor_IA - Painel Real</title>
 <style>
-{box-sizing:border-box}
-body{margin:0;background:#f2f6fc;color:#19324d;font:17px Arial,Helvetica,sans-serif}
-header{background:white;border-bottom:2px solid #dce7f4;padding:22px;text-align:center}
-h1{color:#0758a6;font-size:29px;margin:0}
-header p{margin:8px 0 0}
-main{max-width:1250px;margin:auto;padding:18px}
-h2{font-size:22px;margin:0 0 17px;color:#124979}
-.card{background:#fff;border:1px solid #dbe5f2;border-radius:14px;padding:19px;margin-bottom:17px;min-width:0}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
-.duas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.moedas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.moeda-card{border:1px solid #dbe5f2;border-radius:12px;padding:15px;min-width:0;background:#fcfdff}
-.rotulo,.info{font-size:14px;color:#62768d;line-height:1.5}
-.numero{font-weight:700;color:#0861b2;font-size:23px;margin-top:9px;overflow-wrap:anywhere}
-.cotacao{font-size:19px;font-weight:bold;margin:12px 0 6px;overflow-wrap:anywhere}
-.alta{color:#137a3c}
-.baixa{color:#bd3131}
-.aviso{background:#fff7df;border:1px solid #e4c984;border-radius:12px;padding:16px;margin-bottom:18px;line-height:1.5}
-button{background:#0866c4;color:white;border:0;border-radius:9px;padding:13px 17px;font-size:16px;font-weight:700;cursor:pointer;margin:5px 5px 5px 0}
-button:disabled{opacity:.5;cursor:default}
-.secundario{background:#e7f0fb;color:#0959a5}
-input,select{display:block;width:100%;background:#fff;color:#19324d;border:1px solid #b3c6da;border-radius:9px;padding:13px;font-size:16px;margin:8px 0 16px}
-label{font-weight:bold}
-.status{display:inline-block;padding:9px 13px;border-radius:20px;background:#def5e5;color:#166535;font-weight:bold}
-.status.parado{background:#ffe2e2;color:#a12d2d}
-.tabela{overflow-x:auto}
-table{width:100%;min-width:520px;border-collapse:collapse}
-th,td{text-align:left;padding:12px 9px;border-bottom:1px solid #e1eaf4}
-th{color:#5e7289;font-size:14px}
-footer{text-align:center;padding:22px;color:#697b90}
-@media(max-width:1050px){
-.moedas{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
-@media(max-width:800px){
-.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.duas{grid-template-columns:1fr}
-.moedas{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:420px){
-main{padding:10px}
-.card{padding:13px}
-.numero{font-size:20px}
-.moeda-card{padding:12px}
-.cotacao{font-size:17px}
-}
-</style>
-</head>
-<body>
+
+    { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font: 17px Arial, sans-serif;
+        color: #183653;
+        background: #f1f6fc;
+    }
+    header {
+        background: white;
+        padding: 23px;
+        border-bottom: 2px solid #d6e4f5;
+        text-align: center;
+    }
+    h1 { color: #0758a6; margin: 0; }
+    h2 { color: #0758a6; }
+    main {
+        max-width: 1250px;
+        margin: auto;
+        padding: 16px;
+    }
+    .card {
+        background: white;
+        border: 1px solid #dae5f2;
+        border-radius: 12px;
+        padding: 19px;
+        margin-bottom: 15px;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0,1fr));
+        gap: 13px;
+    }
+    .numero {
+        display: block;
+        font-size: 25px;
+        font-weight: bold;
+        color: #075db0;
+        margin-top: 12px;
+        overflow-wrap: anywhere;
+    }
+    button, .botao {
+        background: #0867c6;
+        border: 0;
+        color: white;
+        padding: 13px 18px;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+    button:disabled { opacity: .55; }
+    button.secundario, .botao.secundario {
+        color: #07539c;
+        background: #e4effc;
+    }
+    input {
+        width: 100%;
+        max-width: 450px;
+        padding: 13px;
+        font-size: 17px;
+        border: 1px solid #b8cbde;
+        border-radius: 8px;
+        display: block;
+        margin: 8px 0 17px;
+    }
+    label { font-weight: bold; }
+    .aviso {
+        background: #fff5df;
+        border: 1px solid #e6c887;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 17px;
+    }
+    .linha {
+        display: flex;
+        gap: 11px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .tabela { overflow-x: auto; }
+    table {
+        width: 100%;
+        min-width: 640px;
+        border-collapse: collapse;
+    }
+    th, td {
+        text-align: left;
+        padding: 12px 9px;
+        border-bottom: 1px solid #dce8f5;
+    }
+    th { color: #536c86; }
+    .pequeno {
+        font-size: 14px;
+        color: #64778a;
+        line-height: 1.5;
+    }
+    .verde { color: #16713b; }
+    .vermelho { color: #b32430; }
+    .oculto { display: none !important; }
+    footer {
+        text-align: center;
+        padding: 25px;
+        color: #657a90;
+    }
+    @media(max-width: 900px) {
+        .grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media(max-width: 450px) {
+        .grid { grid-template-columns: 1fr; }
+        .numero { font-size: 23px; }
+    }
+    </style>
+    </head>
+    <body>
+
 <header>
 <h1>₿ CriptoGestor_IA</h1>
-<p>Gestão inteligente de criptomoedas • Binance Spot</p>
+<p>Monitoramento privado de criptomoedas - Binance Spot</p>
 </header>
 <main>
 <div class="aviso">
-<strong>VERSÃO 2.0 — SOMENTE SIMULAÇÃO</strong>
-<p>As 25 moedas são escolhidas entre os pares USDT em negociação no mercado Spot da Binance, pelo volume das últimas 24 horas, excluindo stablecoins e tokens alavancados. Volume não significa recomendação de investimento. Nenhum dinheiro real é movimentado. Não informe chaves da Binance neste site.</p>
+<strong>PAINEL DE MONITORAMENTO REAL</strong>
+<p>
+Esta página não realiza compras ou vendas.
+Os dados são consultados mediante autenticação.
+Os valores indisponíveis não serão substituídos
+por números fictícios.
+</p>
 </div>
-<section class="grid">
-<div class="card">
-<div class="rotulo">Patrimônio fictício estimado</div>
-<div class="numero" id="patrimonio">—</div>
-</div>
-<div class="card">
-<div class="rotulo">Saldo fictício disponível</div>
-<div class="numero" id="saldo">—</div>
-</div>
-<div class="card">
-<div class="rotulo">Moedas na carteira</div>
-<div class="numero" id="ativos">—</div>
-</div>
-<div class="card">
-<div class="rotulo">Resultado realizado</div>
-<div class="numero" id="resultado">—</div>
-</div>
-</section>
-<section class="card">
-<h2>25 criptomoedas da Binance</h2>
-<p class="info">Ranking pelo volume negociado nas últimas 24 horas, em pares Spot/USDT. Seleção revista a cada 15 minutos; preços consultados a cada 60 segundos.</p>
-<div class="moedas" id="painelMoedas">
-<p>Consultando as moedas disponíveis na Binance...</p>
-</div>
-<p id="atualizacao" class="info" role="status">Carregando mercado...</p>
-<button id="atualizar" type="button">ATUALIZAR COTAÇÕES</button>
-</section>
-<div class="duas">
-<section class="card">
-<h2>Comprar e vender — simulação</h2>
-<form id="formulario">
-<label for="moeda">Criptomoeda</label>
-<select id="moeda" required>
-<option value="">Aguardando lista da Binance...</option>
-</select>
-<label for="tipo">Operação</label>
-<select id="tipo">
-<option value="compra">Comprar</option>
-<option value="venda">Vender</option>
-</select>
-<label for="valor">Valor da operação (USDT)</label>
-<input id="valor" type="number" min="0.01" step="0.01" placeholder="Ex.: 20.00" required>
-<p class="info">Taxa fictícia: 0,10%. Cada compra é limitada a 5% do patrimônio.</p>
-<button type="submit" id="executar" disabled>EXECUTAR SIMULAÇÃO</button>
-<p id="mensagem" role="status" aria-live="polite"></p>
+<section id="login" class="card">
+<h2>🔐 Acesso privado</h2>
+<p>Entre com sua conta cadastrada no Supabase.</p>
+<form id="formLogin">
+<label>Chave pública do projeto</label>
+<input id="chave" required
+placeholder="sb_publishable_..."
+autocomplete="off">
+<label>E-mail autorizado</label>
+<input id="email" type="email" required
+autocomplete="username">
+<label>Senha do painel</label>
+<input id="senha" type="password" required
+autocomplete="current-password">
+<button id="entrar" type="submit">
+ENTRAR NO PAINEL
+</button>
 </form>
+<p id="mensagemLogin" role="status"></p>
+<p class="pequeno">
+Utilize apenas a chave pública.
+Nunca informe chaves privadas da Binance
+ou do Supabase nesta página.
+</p>
 </section>
+<section id="painel" class="oculto">
 <section class="card">
-<h2>Segurança do sistema</h2>
-<p><strong>Situação:</strong>
-<span id="situacao" class="status">Compras liberadas</span></p>
-<p>Limite por compra: <strong>5% do patrimônio</strong></p>
-<p>Limite de perdas realizadas no dia: <strong>3%</strong></p>
-<p>Saques e transferências automáticas: <strong>PROIBIDOS</strong></p>
-<button type="button" id="pausar">PAUSAR NOVAS COMPRAS</button>
-<button type="button" id="reiniciar" class="secundario">REINICIAR SIMULAÇÃO</button>
-<p class="info">Dados fictícios guardados apenas neste navegador. O robô 24 horas será desenvolvido em um servidor privado; esta página não opera quando estiver fechada.</p>
+<div class="linha">
+<strong id="estado" aria-live="polite">
+Verificando motor...
+</strong>
+<span id="atualizacao" class="pequeno">
+Aguardando atualização
+</span>
+<button id="atualizar" type="button">
+ATUALIZAR AGORA
+</button>
+<button id="sair" type="button" class="secundario">
+SAIR
+</button>
+<a href="./robo.html" class="botao secundario">
+ANÁLISE DAS 25 MOEDAS
+</a>
+</div>
+<p id="mensagem" role="status"></p>
 </section>
+<div class="grid">
+<div class="card">
+<span>Patrimônio real estimado - Binance Spot</span>
+<strong id="patrimonio" class="numero">—</strong>
+<p id="qualidade" class="pequeno">
+Aguardando dados
+</p>
+</div>
+<div class="card">
+<span>Saldo USDT livre</span>
+<strong id="disponivel" class="numero">—</strong>
+<p class="pequeno">Saldo disponível na Binance</p>
+</div>
+<div class="card">
+<span>Criptoativos na carteira</span>
+<strong id="moedas" class="numero">—</strong>
+</div>
+<div class="card">
+<span>Variação patrimonial registrada no dia</span>
+<strong id="resultado" class="numero">—</strong>
+<p class="pequeno">
+Não representa lucro líquido.
+Depósitos e saques influenciam esse valor.
+</p>
+</div>
+</div>
+<h2>⚙️ Limites e controles do motor</h2>
+<div class="grid">
+<div class="card">
+<span>Capital máximo configurado</span>
+<strong id="capitalMax" class="numero">—</strong>
+</div>
+<div class="card">
+<span>Máximo por operação</span>
+<strong id="ordemMax" class="numero">—</strong>
+</div>
+<div class="card">
+<span>Perda diária configurada</span>
+<strong id="perdaMax" class="numero">—</strong>
+</div>
+<div class="card">
+<span>Última ordem registrada</span>
+<strong id="ultimaOrdem" class="numero">—</strong>
+</div>
 </div>
 <section class="card">
-<h2>Minha carteira simulada</h2>
+<h2>💰 Carteira real Binance Spot</h2>
+<p class="pequeno">
+Quantidades consultadas na Binance.
+Avaliações em USDT são aproximadas,
+calculadas a partir de preços de mercado.
+</p>
 <div class="tabela">
 <table>
 <thead>
 <tr>
 <th>Moeda</th>
-<th>Quantidade</th>
-<th>Cotação (USDT)</th>
-<th>Valor (USDT)</th>
+<th>Saldo livre</th>
+<th>Bloqueado</th>
+<th>Preço USDT</th>
+<th>Valor estimado</th>
 </tr>
 </thead>
-<tbody id="carteira"></tbody>
+<tbody id="carteira">
+<tr><td colspan="5">Aguardando consulta...</td></tr>
+</tbody>
 </table>
 </div>
 </section>
 <section class="card">
-<h2>Histórico de operações simuladas</h2>
+<h2>📊 Últimas ordens registradas</h2>
+<p class="pequeno">
+Histórico interno do CriptoGestor_IA.
+Uma ordem registrada não significa
+necessariamente ordem executada na Binance.
+</p>
 <div class="tabela">
 <table>
 <thead>
 <tr>
 <th>Data</th>
-<th>Operação</th>
-<th>Moeda</th>
-<th>Valor</th>
-<th>Taxa</th>
+<th>Par</th>
+<th>Compra/Venda</th>
+<th>Valor estimado</th>
+<th>Status</th>
 </tr>
 </thead>
-<tbody id="historico"></tbody>
+<tbody id="historico">
+<tr><td colspan="5">Aguardando registros...</td></tr>
+</tbody>
 </table>
 </div>
 </section>
+</section>
 </main>
 <footer>
-CriptoGestor_IA • Ecossistema Universo NEXUS • Versão 2.0
+CriptoGestor_IA - Universo NEXUS
+<br>
+Painel privado de acompanhamento
 </footer>
 <script>
 "use strict";
+// URL PUBLICA DO PROJETO SUPABASE.
+// NENHUMA CHAVE PRIVADA FICA NO HTML.
+const BASE =
+"https://kmdrdztkgijbikqgpymp.supabase.co";
+const API =
+BASE + "/functions/v1/cg-painel-leitura";
 const $ = id => document.getElementById(id);
-const CHAVE = "criptogestor_ia_dados_v1";
-const API = "https://data-api.binance.vision/api/v3/";
-const IGNORAR = new Set([
-"USDT","USDC","FDUSD","TUSD","DAI","USDE",
-"USDP","USD1","RLUSD","PYUSD","BFUSD",
-"EUR","EURC","EURI","AEUR","BRL","TRY",
-"ARS","UAH","RUB","ZAR","VAI","USTC",
-"WBTC","WBETH","WETH","WBNB","BETH",
-"STETH","LDUSDT","USDY","USDD","PAXG"
-]);
-const dinheiro = v =>
-Number(v).toLocaleString("pt-BR", {
+let chave = localStorage.getItem("cg_public_key") || "";
+let sessao = null;
+let ocupado = false;
+try {
+sessao = JSON.parse(
+sessionStorage.getItem("cg_sessao") || "null"
+);
+} catch {
+sessao = null;
+}
+$("chave").value = chave;
+function dinheiro(valor) {
+if (
+valor === null ||
+valor === undefined ||
+!Number.isFinite(Number(valor))
+) return "Indisponível";
+return Number(valor).toLocaleString("pt-BR", {
 minimumFractionDigits: 2,
 maximumFractionDigits: 2
 }) + " USDT";
-const quantidade = v =>
-Number(v).toLocaleString("pt-BR", {
+}
+function quantidade(valor) {
+if (
+valor === null ||
+valor === undefined ||
+!Number.isFinite(Number(valor))
+) return "—";
+return Number(valor).toLocaleString("pt-BR", {
 maximumFractionDigits: 8
 });
-const cotacao = v =>
-Number(v).toLocaleString("pt-BR", {
-minimumFractionDigits: 2,
-maximumFractionDigits:
-v >= 100 ? 2 :
-v >= 1 ? 4 :
-v >= 0.01 ? 6 : 10
-}) + " USDT";
-const hoje = () =>
-new Date().toLocaleDateString("sv-SE", {
+}
+function dataBR(valor) {
+if (!valor) return "—";
+const data = new Date(valor);
+if (Number.isNaN(data.getTime())) return "—";
+return data.toLocaleString("pt-BR", {
 timeZone: "America/Sao_Paulo"
 });
-const seguro = t =>
-String(t).replace(/[&<>"']/g, c => ({
-"&": "&amp;",
-"<": "&lt;",
-">": "&gt;",
-'"': "&quot;",
-"'": "&#39;"
-}[c]));
-const novo = () => ({
-saldo: 1000,
-moedas: { BTC: 0, ETH: 0, SOL: 0 },
-custos: { BTC: 0, ETH: 0, SOL: 0 },
-resultado: 0,
-pausado: false,
-data: hoje(),
-perda: 0,
-inicio: 1000,
-historico: []
+}
+function texto(id, valor) {
+$(id).textContent = String(valor ?? "—");
+}
+function mostrarPainel(mostrar) {
+$("painel").classList.toggle("oculto", !mostrar);
+$("login").classList.toggle("oculto", mostrar);
+}
+function encerrarSessao() {
+sessao = null;
+sessionStorage.removeItem("cg_sessao");
+$("senha").value = "";
+mostrarPainel(false);
+}
+async function requisicao(url, opcoes = {}) {
+const controle = new AbortController();
+const prazo = setTimeout(() => controle.abort(), 13000);
+try {
+const resposta = await fetch(url, {
+...opcoes,
+signal: controle.signal,
+cache: "no-store"
 });
-function carregar() {
+let dados = {};
 try {
-const d = JSON.parse(localStorage.getItem(CHAVE));
-if (
-d &&
-Number.isFinite(d.saldo) &&
-d.saldo >= 0 &&
-d.moedas &&
-d.custos &&
-Array.isArray(d.historico) &&
-Number.isFinite(d.resultado) &&
-Number.isFinite(d.perda) &&
-Object.entries(d.moedas).every(([m,q]) =>
-/^[A-Z0-9]{2,20}$/.test(m) &&
-Number.isFinite(q) &&
-q >= 0 &&
-Number.isFinite(d.custos[m]) &&
-d.custos[m] >= 0
-)
-) return d;
-} catch(e) {}
-return novo();
-}
-let estado = carregar();
-let pares = new Map();
-let cotacoes = new Map();
-let selecionadas = [];
-let ultimaConsulta = 0;
-let ultimaSelecao = 0;
-let carregando = false;
-function salvar() {
-try {
-localStorage.setItem(CHAVE, JSON.stringify(estado));
-} catch(e) {
-console.warn("Armazenamento indisponível");
-}
-}
-function fresca(m) {
-const t = cotacoes.get(m);
-return Boolean(
-t &&
-t.price > 0 &&
-Date.now() - ultimaConsulta < 180000 &&
-pares.has(m)
+dados = await resposta.json();
+} catch {}
+if (!resposta.ok) {
+throw new Error(
+dados.error ||
+dados.erro ||
+dados.message ||
+"HTTP " + resposta.status
 );
 }
-function faltaCotacao() {
-return Object.entries(estado.moedas).some(
-([m,q]) => q > 0 && !fresca(m)
-);
-}
-function patrimonio() {
-return estado.saldo +
-Object.entries(estado.moedas).reduce(
-(s,[m,q]) => s + q * (cotacoes.get(m)?.price || 0),
-0
-);
-}
-function virarDia() {
-if (estado.data !== hoje()) {
-estado.data = hoje();
-estado.perda = 0;
-estado.inicio = faltaCotacao() ? null : patrimonio();
-salvar();
-}
-if (estado.inicio === null && !faltaCotacao()) {
-estado.inicio = patrimonio();
-salvar();
-}
-}
-function bloqueada() {
-return estado.inicio !== null &&
-estado.perda >= estado.inicio * 0.03;
-}
-function aviso(t, erro=false) {
-$("mensagem").textContent = t;
-$("mensagem").style.color =
-erro ? "#b42b2b" : "#166b3b";
-}
-function atualizarSeletor() {
-const anterior = $("moeda").value;
-const extras = Object.keys(estado.moedas).filter(
-m =>
-estado.moedas[m] > 0 &&
-!selecionadas.includes(m) &&
-pares.has(m)
-);
-const lista = [...selecionadas, ...extras];
-$("moeda").replaceChildren();
-for (const m of lista) {
-const opt = document.createElement("option");
-opt.value = m;
-opt.textContent =
-m + (extras.includes(m) ? " (na carteira)" : "");
-$("moeda").append(opt);
-}
-if (lista.includes(anterior)) {
-$("moeda").value = anterior;
-}
-$("executar").disabled = lista.length === 0;
-}
-function renderizar() {
-virarDia();
-$("saldo").textContent = dinheiro(estado.saldo);
-$("resultado").textContent = dinheiro(estado.resultado);
-$("resultado").style.color =
-estado.resultado < 0 ? "#ba2d2d" : "#176735";
-$("ativos").textContent =
-Object.values(estado.moedas)
-.filter(q => q > 0.000000001).length + " ativos";
-$("patrimonio").textContent =
-faltaCotacao()
-? "Cotação indisponível"
-: dinheiro(patrimonio());
-const b = estado.pausado || bloqueada();
-$("situacao").textContent =
-estado.pausado
-? "Compras pausadas"
-: bloqueada()
-? "Limite diário atingido"
-: "Compras liberadas";
-$("situacao").className =
-"status" + (b ? " parado" : "");
-$("pausar").textContent =
-estado.pausado
-? "LIBERAR COMPRAS"
-: "PAUSAR NOVAS COMPRAS";
-$("painelMoedas").innerHTML =
-selecionadas.length
-? selecionadas.map((m,i) => {
-const t = cotacoes.get(m);
-const p = t?.price;
-const variacao = t?.change;
-const volume = t?.volume;
-return `
-<div class="moeda-card">
-<strong>${i+1}. ${seguro(m)}</strong>
-<div class="cotacao">
-${p > 0 ? cotacao(p) : "Indisponível"}
-</div>
-<div class="${variacao >= 0 ? "alta" : "baixa"}">
-${Number.isFinite(variacao)
-? (variacao > 0 ? "+" : "") +
-variacao.toFixed(2) + "% (24h)"
-: "Sem dados"}
-</div>
-<div class="info">
-Volume 24h:
-${Number(volume || 0).toLocaleString("pt-BR",{
-notation:"compact",
-maximumFractionDigits:1
-})} USDT
-</div>
-</div>`;
-}).join("")
-: "<p>Consultando moedas disponíveis na Binance...</p>";
-const mostrar = [
-...new Set([
-...selecionadas,
-...Object.keys(estado.moedas).filter(
-m => estado.moedas[m] > 0
-)
-])
-];
-$("carteira").innerHTML =
-mostrar.length
-? mostrar.map(m => `
-<tr>
-<td>${seguro(m)}</td>
-<td>${quantidade(estado.moedas[m] || 0)}</td>
-<td>${fresca(m) ? cotacao(cotacoes.get(m).price) : "Indisponível"}</td>
-<td>${fresca(m) ? dinheiro((estado.moedas[m] || 0) * cotacoes.get(m).price) : "—"}</td>
-</tr>
-`).join("")
-: '<tr><td colspan="4">Aguardando mercado...</td></tr>';
-$("historico").innerHTML =
-estado.historico.length
-? estado.historico.slice(0,30).map(o => `
-<tr>
-<td>${seguro(o.data)}</td>
-<td>${seguro(o.tipo)}</td>
-<td>${seguro(o.moeda)}</td>
-<td>${dinheiro(o.valor)}</td>
-<td>${dinheiro(o.taxa)}</td>
-</tr>
-`).join("")
-: '<tr><td colspan="5">Nenhuma operação registrada.</td></tr>';
-atualizarSeletor();
-}
-async function requisicao(caminho) {
-const ctrl = new AbortController();
-const timer = setTimeout(
-() => ctrl.abort(),
-15000
-);
-try {
-const r = await fetch(API + caminho, {
-cache: "no-store",
-signal: ctrl.signal
-});
-if (!r.ok) {
-throw Error("Binance HTTP " + r.status);
-}
-return await r.json();
+return dados;
 } finally {
-clearTimeout(timer);
+clearTimeout(prazo);
 }
 }
-async function atualizarMercado() {
-if (carregando) return;
-carregando = true;
-$("atualizar").disabled = true;
-$("atualizacao").textContent =
-"Consultando Binance Spot...";
-try {
-if (pares.size === 0) {
-const info = await requisicao("exchangeInfo");
-const validos = (info.symbols || []).filter(s =>
-s.status === "TRADING" &&
-s.isSpotTradingAllowed === true &&
-s.quoteAsset === "USDT" &&
-/^[A-Z0-9]{2,20}$/.test(s.baseAsset) &&
-/^[A-Z0-9]{4,30}$/.test(s.symbol) &&
-!IGNORAR.has(s.baseAsset) &&
-!(
-s.baseAsset.length >= 5 &&
-/(UP|DOWN|BULL|BEAR)$/.test(s.baseAsset)
-)
+async function tokenAtual() {
+if (!sessao?.access_token) {
+throw new Error("Faça login novamente.");
+}
+const vencimento =
+Number(sessao.expires_at || 0);
+if (Date.now() >= (vencimento - 60) * 1000) {
+const nova = await requisicao(
+BASE + "/auth/v1/token?grant_type=refresh_token",
+{
+method: "POST",
+headers: {
+apikey: chave,
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+refresh_token: sessao.refresh_token
+})
+}
 );
-pares = new Map(
-validos.map(s => [s.baseAsset,s.symbol])
+sessao = {
+...nova,
+expires_at:
+Math.floor(Date.now() / 1000) +
+Number(nova.expires_in || 3600)
+};
+sessionStorage.setItem(
+"cg_sessao",
+JSON.stringify(sessao)
 );
 }
-const lista = await requisicao("ticker/24hr");
-if (!Array.isArray(lista)) {
-throw Error("Resposta de mercado inválida");
+return sessao.access_token;
 }
-const porSimbolo = new Map(
-lista.map(t => [t.symbol,t])
+function celula(linha, valor) {
+const td = document.createElement("td");
+td.textContent = String(valor ?? "—");
+linha.appendChild(td);
+}
+function desenhar(dados) {
+const configuracao = dados.configuracao || {};
+const motor = dados.estado || {};
+const binance = dados.binance || {};
+const habilitado =
+configuracao.operacoes_habilitadas === true &&
+motor.pausado === false;
+texto(
+"estado",
+habilitado
+? "Motor habilitado e não pausado"
+: "Motor pausado ou desabilitado"
 );
-const novos = new Map();
-for (const [moeda,simbolo] of pares) {
-const t = porSimbolo.get(simbolo);
-const price = Number(t?.lastPrice);
-const volume = Number(t?.quoteVolume);
-const change = Number(t?.priceChangePercent);
-if (
-price > 0 &&
-Number.isFinite(volume) &&
-volume > 0
-) {
-novos.set(moeda, {
-price,
-volume,
-change: Number.isFinite(change) ? change : 0
-});
+$("estado").className =
+habilitado ? "verde" : "vermelho";
+texto(
+"atualizacao",
+"Última consulta: " + dataBR(dados.consultado_em)
+);
+texto(
+"capitalMax",
+dinheiro(configuracao.limite_total_usdt)
+);
+texto(
+"ordemMax",
+dinheiro(configuracao.limite_ordem_usdt)
+);
+texto(
+"perdaMax",
+dinheiro(configuracao.perda_diaria_max_usdt)
+);
+texto(
+"ultimaOrdem",
+dataBR(motor.ultima_ordem_em)
+);
+const hojeUTC = new Date().toISOString().slice(0,10);
+const patrimonioAtual =
+Number(motor.patrimonio_atual_usdt);
+const patrimonioInicial =
+Number(motor.patrimonio_inicial_usdt);
+const resultadoValido =
+motor.dia_utc === hojeUTC &&
+motor.patrimonio_atual_usdt != null &&
+motor.patrimonio_inicial_usdt != null &&
+Number.isFinite(patrimonioAtual) &&
+Number.isFinite(patrimonioInicial);
+texto(
+"resultado",
+resultadoValido
+? dinheiro(patrimonioAtual - patrimonioInicial)
+: "Indisponível"
+);
+const corpoCarteira = $("carteira");
+corpoCarteira.replaceChildren();
+if (binance.ok === true) {
+texto(
+"patrimonio",
+binance.completo
+? dinheiro(binance.total_usdt)
+: "Parcial: " + dinheiro(binance.total_usdt)
+);
+texto(
+"disponivel",
+dinheiro(binance.usdt_livre)
+);
+const ativos = Array.isArray(binance.moedas)
+? binance.moedas
+: [];
+texto(
+"moedas",
+ativos.filter(m => m.ativo !== "USDT").length
+);
+texto(
+"qualidade",
+binance.completo
+? "Carteira avaliada com preços de mercado"
+: "Alguns ativos estão sem cotação USDT"
+);
+for (const moeda of ativos) {
+const tr = document.createElement("tr");
+[
+moeda.ativo,
+quantidade(moeda.livre),
+quantidade(moeda.bloqueado),
+moeda.preco_usdt == null
+? "Não cotado"
+: dinheiro(moeda.preco_usdt),
+dinheiro(moeda.valor_usdt)
+].forEach(v => celula(tr, v));
+corpoCarteira.appendChild(tr);
 }
+if (!ativos.length) {
+const tr = document.createElement("tr");
+celula(tr, "Nenhum ativo encontrado");
+corpoCarteira.appendChild(tr);
 }
-if (novos.size < 25) {
-throw Error("Menos de 25 moedas disponíveis nesta consulta");
-}
-cotacoes = novos;
-ultimaConsulta = Date.now();
-if (
-selecionadas.length !== 25 ||
-Date.now() - ultimaSelecao > 900000
-) {
-selecionadas = [...cotacoes.entries()]
-.sort((a,b) => b[1].volume - a[1].volume)
-.slice(0,25)
-.map(([m]) => m);
-ultimaSelecao = Date.now();
-}
-$("atualizacao").textContent =
-"25 pares Spot/USDT confirmados na Binance • Atualizado às " +
-new Date().toLocaleTimeString("pt-BR") +
-". Disponibilidade na sua conta pode variar por região.";
-} catch(e) {
-$("atualizacao").textContent =
-"Não foi possível atualizar a lista da Binance: " +
-e.message +
-". Confira a conexão e clique em ATUALIZAR COTAÇÕES.";
-} finally {
-carregando = false;
-$("atualizar").disabled = false;
-renderizar();
-}
-}
-$("formulario").addEventListener("submit",e => {
-e.preventDefault();
-virarDia();
-const m = $("moeda").value;
-const tipo = $("tipo").value;
-const valor = Number($("valor").value);
-const permitido =
-selecionadas.includes(m) ||
-(estado.moedas[m] > 0 && pares.has(m));
-if (
-!permitido ||
-!["compra","venda"].includes(tipo) ||
-!Number.isFinite(valor) ||
-valor <= 0
-) {
-aviso("Operação inválida.",true);
-return;
-}
-if (!fresca(m) || faltaCotacao()) {
-aviso("Aguarde preços válidos e atualizados.",true);
-return;
-}
-const preco = cotacoes.get(m).price;
-const taxa = valor * 0.001;
-const unidades =
-tipo === "compra"
-? (valor - taxa) / preco
-: valor / preco;
-if (tipo === "compra") {
-if (
-estado.pausado ||
-bloqueada() ||
-estado.inicio === null
-) {
-aviso("Compras bloqueadas pela segurança.",true);
-return;
-}
-if (valor > patrimonio() * 0.05 + 0.000001) {
-aviso("Compra acima de 5% do patrimônio.",true);
-return;
-}
-if (valor > estado.saldo + 0.000001) {
-aviso("Saldo fictício insuficiente.",true);
-return;
-}
-const anterior = estado.moedas[m] || 0;
-const custo = estado.custos[m] || 0;
-estado.custos[m] =
-(anterior * custo + valor) /
-(anterior + unidades);
-estado.moedas[m] = anterior + unidades;
-estado.saldo -= valor;
 } else {
-if (
-unidades >
-(estado.moedas[m] || 0) + 0.0000000001
-) {
-aviso("Quantidade insuficiente na carteira.",true);
-return;
-}
-const lucro =
-valor - taxa -
-unidades * (estado.custos[m] || 0);
-estado.resultado += lucro;
-estado.perda += Math.max(0,-lucro);
-estado.moedas[m] = Math.max(
-0,
-estado.moedas[m] - unidades
+texto("patrimonio", "Indisponível");
+texto("disponivel", "Indisponível");
+texto("moedas", "—");
+texto(
+"qualidade",
+"Leitura privada Binance ainda não conectada"
 );
-if (estado.moedas[m] < 0.0000000001) {
-estado.moedas[m] = 0;
-estado.custos[m] = 0;
+const tr = document.createElement("tr");
+celula(tr, "Aguardando integração Binance");
+corpoCarteira.appendChild(tr);
 }
-estado.saldo += valor - taxa;
+const corpoHistorico = $("historico");
+corpoHistorico.replaceChildren();
+const ordens = Array.isArray(dados.ordens)
+? dados.ordens
+: [];
+for (const ordem of ordens) {
+const tr = document.createElement("tr");
+[
+dataBR(ordem.criado_em),
+ordem.par || "—",
+ordem.lado || "—",
+dinheiro(ordem.valor_estimado_usdt),
+ordem.status || "—"
+].forEach(v => celula(tr, v));
+corpoHistorico.appendChild(tr);
 }
-estado.historico.unshift({
-data: new Date().toLocaleString("pt-BR"),
-tipo: tipo === "compra" ? "Compra" : "Venda",
-moeda: m,
-valor,
-taxa
-});
-estado.historico = estado.historico.slice(0,100);
-salvar();
-renderizar();
-$("valor").value = "";
-aviso(
-"Operação simulada registrada. Nenhum dinheiro real foi movimentado."
+if (!ordens.length) {
+const tr = document.createElement("tr");
+celula(tr, "Nenhuma ordem retornada");
+corpoHistorico.appendChild(tr);
+}
+texto(
+"mensagem",
+binance.ok
+? "Dados consultados. Estado do timer Vultr não verificado."
+: "Supabase consultado. Leitura da Binance pendente."
 );
-});
-$("pausar").addEventListener("click", () => {
-estado.pausado = !estado.pausado;
-salvar();
-renderizar();
-});
-$("reiniciar").addEventListener("click", () => {
-if (
-confirm(
-"Apagar a simulação e reiniciar com 1.000 USDT fictícios?"
-)
-) {
-estado = novo();
-salvar();
-renderizar();
-aviso("Simulação reiniciada.");
+}
+async function atualizar() {
+if (ocupado || !sessao || document.hidden) return;
+ocupado = true;
+$("atualizar").disabled = true;
+try {
+const token = await tokenAtual();
+const dados = await requisicao(API, {
+method: "GET",
+headers: {
+apikey: chave,
+Authorization: "Bearer " + token,
+Accept: "application/json"
 }
 });
+if (dados.ok !== true) {
+throw new Error(
+dados.erro || "Dados não confirmados"
+);
+}
+desenhar(dados);
+} catch (erro) {
+texto(
+"mensagem",
+"Erro de consulta: " + erro.message
+);
+texto("estado", "Sem confirmação atual");
+$("estado").className = "vermelho";
+if (
+/401|403|acesso|autorizad|sessão|token/i
+.test(erro.message)
+) {
+encerrarSessao();
+texto(
+"mensagemLogin",
+"Acesso negado ou sessão expirada."
+);
+}
+} finally {
+ocupado = false;
+$("atualizar").disabled = false;
+}
+}
+$("formLogin").addEventListener(
+"submit",
+async evento => {
+evento.preventDefault();
+$("entrar").disabled = true;
+texto("mensagemLogin", "Autenticando...");
+try {
+chave = $("chave").value.trim();
+if (!chave.startsWith("sb_publishable_") &&
+!chave.startsWith("eyJ")) {
+throw new Error(
+"Informe somente a chave pública do Supabase."
+);
+}
+const dados = await requisicao(
+BASE + "/auth/v1/token?grant_type=password",
+{
+method: "POST",
+headers: {
+apikey: chave,
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+email: $("email").value.trim(),
+password: $("senha").value
+})
+}
+);
+sessao = {
+...dados,
+expires_at:
+Math.floor(Date.now() / 1000) +
+Number(dados.expires_in || 3600)
+};
+sessionStorage.setItem(
+"cg_sessao",
+JSON.stringify(sessao)
+);
+localStorage.setItem("cg_public_key", chave);
+$("senha").value = "";
+mostrarPainel(true);
+await atualizar();
+} catch (erro) {
+texto("mensagemLogin", erro.message);
+} finally {
+$("entrar").disabled = false;
+}
+}
+);
 $("atualizar").addEventListener(
-"click",
-atualizarMercado
+"click", atualizar
 );
-renderizar();
-atualizarMercado();
-setInterval(() => {
-if (!document.hidden) atualizarMercado();
-},60000);
-document.addEventListener("visibilitychange", () => {
-if (
-!document.hidden &&
-Date.now() - ultimaConsulta > 60000
-) {
-atualizarMercado();
-}
+$("sair").addEventListener("click", () => {
+encerrarSessao();
+texto("mensagemLogin", "Sessão encerrada.");
 });
+if (sessao && chave) {
+mostrarPainel(true);
+atualizar();
+} else {
+mostrarPainel(false);
+}
+// Atualizacao automatica a cada 20 segundos.
+setInterval(atualizar, 20000);
+document.addEventListener(
+"visibilitychange",
+() => {
+if (!document.hidden) atualizar();
+}
+);
 </script>
 </body>
 </html>
